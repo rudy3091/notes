@@ -16,12 +16,12 @@ struct Node {
 
 	~Node() {
 		if (left != nullptr) {
-			left = nullptr;
 			delete left;
+			left = nullptr;
 		}
 		if (right != nullptr) {
-			right = nullptr;
 			delete right;
+			right = nullptr;
 		}
 	}
 
