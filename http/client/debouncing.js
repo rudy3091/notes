@@ -1,6 +1,6 @@
 (function() {
 	// event handler 외부에 변수를 선언
-	// event가 발생되면 500 초 뒤에 setTimeout 내 함수 실행
+	// event가 발생되면 200ms 뒤에 setTimeout 내 함수 실행
 	// 이 방법으로 debouncing 구현시 모든 interaction이 종료되어야
 	// 의도한 작업이 실행되는 단점이 존재
 	// 즉, event의 trailing에 작업이 진행됨
