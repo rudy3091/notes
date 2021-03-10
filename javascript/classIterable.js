@@ -38,6 +38,8 @@ for (let i of cnt) {
 }
 
 
+// iterating over range defined by class constructor
+// like range() in python
 class Range {
 	constructor(start, end, step = 1) {
 		this.start = start;
@@ -64,5 +66,33 @@ class Range {
 console.log("Range class");
 for (let i of new Range(1, 8, 3)) {
 	console.log(i);
+}
+
+
+// iterating over 2 dim matrix
+class Matrix {
+	constructor(arr) {
+		this.matrix = arr
+	}
+
+	*[Symbol.iterator]() {
+		for (let row of this.matrix) {
+			for (let col of row) {
+				yield col
+			}
+		}
+	}
+}
+
+console.log("Matrix class");
+const matrix = new Matrix(
+	[
+		[1, 2, 3],
+		[4, 5, 6],
+		[7, 8, 9],
+	]
+);
+for (let cell of matrix) {
+	console.log(cell);
 }
 
