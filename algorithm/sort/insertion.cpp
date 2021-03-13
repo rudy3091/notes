@@ -1,21 +1,15 @@
 #include <iostream>
 using namespace std;
 
-// insert arr[idx] into arr[target]
-void insert(int arr[], int n, int idx, int target) {
-	int val = arr[idx];
-	if (idx < target) return;
-	for (int i = idx; i > target; i--) {
-		arr[i] = arr[i - 1];
-	}
-	arr[target] = val;
-}
-
 void insertion_sort(int arr[], int n) {
 	for (int i = 1; i < n; i++) {
-		for (int j = 0; j < i; j++) {
-			if (arr[j] > arr[i]) {
-				insert(arr, n, i, j);
+		int key = arr[i];
+		for (int j = i - 1; j >= 0; j--) {
+			if (key < arr[j]) {
+				arr[j + 1] = arr[j];
+				arr[j] = key;
+			} else {
+				break;
 			}
 		}
 	}
