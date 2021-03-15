@@ -23,6 +23,7 @@ bool cmp(tuple<int, int, int> a, tuple<int, int, int> b) {
 }
 
 void kruskal(vector<int>& _parent, vector<tuple<int, int, int>>& _edges) {
+	cout << "=== kruskal algorithm ===" << '\n';
 	int cost_sum = 0;
 	for (int i = 0; i < 7; i++) {
 		_parent[i] = i;
@@ -37,7 +38,7 @@ void kruskal(vector<int>& _parent, vector<tuple<int, int, int>>& _edges) {
 		if (find_parent(_parent, a) != find_parent(_parent, b)) {
 			_union(_parent, a, b);
 			cout << "add edge between vertex " << a+1
-				<< " and " << b+1 << endl;
+				<< " and " << b+1 << " with cost " << cost << endl;
 			cost_sum += cost;
 		}
 	}

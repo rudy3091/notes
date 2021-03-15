@@ -1,6 +1,7 @@
 #include <vector>
 #include <tuple>
 #include "mst.cpp"
+#include "prim.cpp"
 using namespace std;
 
 vector<int> parent(7);
@@ -15,6 +16,7 @@ vector<tuple<int, int, int>> edges = {
 
 int main() {
 	kruskal(parent, edges);
+	prim(parent, edges);
 	return 0;
 }
 
