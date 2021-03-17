@@ -141,17 +141,17 @@ struct Node {
 	void inorder(Node* t) {
 		Node* l = t -> left;
 		Node* r = t -> right;
-		if (l != nullptr) preorder(l);
+		if (l != nullptr) inorder(l);
 		cout << t -> val << ' ';
-		if (r != nullptr) preorder(r);
+		if (r != nullptr) inorder(r);
 		if (l == nullptr && r == nullptr) return;
 	}
 
 	void postorder(Node* t) {
 		Node* l = t -> left;
 		Node* r = t -> right;
-		if (l != nullptr) preorder(l);
-		if (r != nullptr) preorder(r);
+		if (l != nullptr) postorder(l);
+		if (r != nullptr) postorder(r);
 		cout << t -> val << ' ';
 		if (l == nullptr && r == nullptr) return;
 	}
