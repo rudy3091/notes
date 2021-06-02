@@ -1,11 +1,11 @@
-type Maybe<T> = T | undefined
+export type Maybe<T> = T | undefined
 
-function Just<T> (x: T): () => Maybe<T> {
+export function Just<T> (x: T): () => Maybe<T> {
   const just = () => x;
   return just;
 }
 
-function Nothing<T>(): () => Maybe<T> {
+export function Nothing<T>(): () => Maybe<T> {
   const nothing = () => undefined;
   return nothing;
 }
@@ -21,12 +21,15 @@ Function.prototype['>>='] = function <T>(f: Function) {
   };
 }
 
-const doub = (x: number) => Just (x * 2);
+Function.prototype['<$>'] = function <T>(m: () => Maybe<T>) {
+  const that: (x: T) => Maybe<T> = this;
+  // return that ( m () ) === undefined ? Nothing () : Just ( m () );
+  return that( m () ) === undefined ? {
+    unwrap: () => Nothing(),
+    toString: () => 'Nothing'
+  } : {
+    unwrap: () => Just ( that (m ()) ) (),
+    toString: () => `Just ${Just ( that (m ()) ) ()}`
+  }
+}
 
-const res = (Just (3)) ['>>='] (doub);
-console.log(res.unwrap()); // 6
-console.log(res.toString()); // 'Just 6'
-
-const resNothing = (Nothing ()) ['>>='] (doub);
-console.log(resNothing.unwrap()); // [Function: nothing]
-console.log(resNothing.toString()); // 'Nothing'
