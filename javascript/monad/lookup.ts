@@ -1,4 +1,4 @@
-import { Just, Nothing } from "./maybe";
+import { Just, Nothing, unwrap } from "./maybe";
 
 const dictionary = {
   a: 'b',
@@ -6,7 +6,10 @@ const dictionary = {
 };
 
 const lookUp = (key: string) =>
-  dictionary[key] === undefined ? Nothing () : Just (dictionary[key]);
+  dictionary[key] === undefined ? Nothing () : Just ( dictionary[key] );
 
-console.log( ( (lookUp ('a')) ['>>='] (lookUp) ).toString() ) // Just c
+console.log( unwrap( lookUp ('a') ['>>='] (lookUp) ) ) // Just c
+console.log( unwrap( lookUp ('b') ['>>='] (lookUp) ) ) // Nothing
+console.log( unwrap( lookUp ('b') ) ) // Just c
+console.log( unwrap( lookUp ('c') ) ) // Nothing
 

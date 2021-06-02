@@ -2,7 +2,8 @@ export type Maybe<T> = T | undefined
 
 export function Just<T> (x: T): () => Maybe<T> {
   const just = () => x;
-  return just;
+  const nothing = () => undefined;
+  return x === undefined ? nothing : just;
 }
 
 export function Nothing<T>(): () => Maybe<T> {
@@ -10,26 +11,19 @@ export function Nothing<T>(): () => Maybe<T> {
   return nothing;
 }
 
-Function.prototype['>>='] = function <T>(f: Function) {
-  const that: () => Maybe<T> = this;
-  return that() === undefined ? {
-    unwrap: () => Nothing(),
-    toString: () => 'Nothing'
-  } : {
-    unwrap: () => f ( that() ) (),
-    toString: () => `Just ${f ( that() ) ()}`
-  };
+export function unwrap<T>(m: () => Maybe<T>): string {
+  const M = m();
+  return M === undefined ? 'Nothing' : `Just ${M}`;
 }
 
-Function.prototype['<$>'] = function <T>(m: () => Maybe<T>) {
-  const that: (x: T) => Maybe<T> = this;
-  // return that ( m () ) === undefined ? Nothing () : Just ( m () );
-  return that( m () ) === undefined ? {
-    unwrap: () => Nothing(),
-    toString: () => 'Nothing'
-  } : {
-    unwrap: () => Just ( that (m ()) ) (),
-    toString: () => `Just ${Just ( that (m ()) ) ()}`
-  }
+Function.prototype['>>='] = function <T>(f: (x: any) => Maybe<T>) {
+  const M = this ();
+  return M === undefined ? Nothing () : f (M);
+}
+
+Function.prototype['<$>'] = function <T>(m: () => Maybe<T>): () => Maybe<T> {
+  const x = m();
+  const M = x === undefined ? undefined : this ( x );
+  return M === undefined ? Nothing () : Just ( M );
 }
 
