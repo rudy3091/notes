@@ -4,7 +4,7 @@ type Stack<T> = T[];
 
 const newStack = () => Just ([]);
 
-const push = <T extends unknown>(x: T) => (s: Stack<T>) =>
+const push = <T> (x: T) => (s: Stack<T>) =>
   Just (s.concat(x));
 
 const isEmpty = <T> (s: Stack<T>) =>
@@ -16,7 +16,7 @@ const pop = <T> (s: Stack<T>) =>
 const peek = <T> (s: Stack<T>) =>
   s.length === 0 ? Nothing () : Just (s[s.length - 1]);
 
-const peekLog = <T extends unknown>(s: Stack<T>) =>
+const peekLog = <T> (s: Stack<T>) =>
   console.log( unwrap( peek (s) ) )
 
 
