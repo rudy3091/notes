@@ -31,6 +31,13 @@ class Baz {
   }
 }
 
+class Fooo {
+  // this.x in parameter
+  Fooo({this.x, required this.y});
+  int? x;
+  int y;
+}
+
 void main() {
   Foo f = new Foo(10, 11);
   print(f.x); // 10
@@ -46,4 +53,8 @@ void main() {
   baz.change = 1;
   print(baz._x); // 1
   print(baz.x); // 10
+
+  Fooo f2 = Fooo(x: 1, y: 2);
+  print(f2.x); // 1
+  print(f2.y); // 2
 }
