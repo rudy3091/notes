@@ -38,6 +38,11 @@ class Fooo {
   int y;
 }
 
+class Barr {
+  int? x, y;
+  Barr({this.x, this.y});
+}
+
 void main() {
   Foo f = new Foo(10, 11);
   print(f.x); // 10
@@ -57,4 +62,9 @@ void main() {
   Fooo f2 = Fooo(x: 1, y: 2);
   print(f2.x); // 1
   print(f2.y); // 2
+
+  Barr barr = new Barr(x: 111, y: 222);
+  Barr barr2 = Barr(x: 111, y: 222); // after dart2, we don't need 'new' keyword in class constructor
+  print(barr.x); // 111
+  print(barr2.x); // 111
 }
