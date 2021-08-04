@@ -24,3 +24,21 @@ const str = 'hello world';
 const my = toBase64(str);
 const lib = Buffer.from(str).toString('base64');
 console.log(my === lib); // true
+
+const fromBase64 = (base64) => {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  return base64
+    .split('')
+    .map(char => chars.indexOf(char))
+    .filter(x => x !== -1)
+    .map(dec => dec.toString(2).padStart(6, 0))
+    .join('')
+    .match(/.{8}/g)
+    .map((bin) => String.fromCharCode(parseInt(bin, 2)))
+    .join('');
+}
+
+const myDecoded = fromBase64(my);
+const libDecoded = atob(my);
+console.log(myDecoded === libDecoded); // true
