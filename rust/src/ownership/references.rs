@@ -43,6 +43,11 @@ fn main() {
     // 확인해줌
     //
     let dangled = dangle();
+
+    // 결론:
+    // 참조자를 사용할 때엔 아래 두 케이스 중 한가지만 가능함
+    // 1. 하나의 mutable 참조자
+    // 2. 여러 immutable 참조자
 }
 
 fn not_taking_ownership(s: &String) -> usize {
