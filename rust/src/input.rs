@@ -10,8 +10,10 @@ fn main() {
     println!("{}", buf);
 
     // method2: collect all in a vector
-    let v = stdin.lock().lines().map(|x| {
-        x.unwrap().split_whitespace().collect::<Vec<_>>();
-    });
+    let v = stdin
+        .lock()
+        .lines()
+        .map(|x| x.unwrap().parse().unwrap())
+        .collect::<Vec<i32>>();
     println!("{:?}", v);
 }
