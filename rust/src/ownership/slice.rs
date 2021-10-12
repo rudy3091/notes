@@ -23,6 +23,17 @@ fn main() {
     //
     // 스트링 슬라이스 역시 참조자의 일종이므로 원래 데이터가
     // 없어지면 컴파일 타임에 에러가 발생함
+
+    let arr = [1, 2, 3, 4, 5, 6];
+    let part_of_arr = &arr[1..4]; // 타입: &[i32]
+    println!("{:?}", part_of_arr); // [2, 3, 4]
+
+    let sum = sum_slice(part_of_arr);
+    println!("sum: {}", sum); // 9
+
+    // sum_slice 함수로 슬라이스를 전달했기 때문에 이후에도
+    // part_of_arr의 소유권은 옮겨가지 않았음
+    println!("{:?}", part_of_arr); // [2, 3, 4]
 }
 
 // 예제: 문자열을 입력받아 첫번째 단어를 반환하는 함수
@@ -38,4 +49,10 @@ fn first_word(s: &String) -> usize {
     }
 
     s.len()
+}
+
+fn sum_slice(sl: &[i32]) -> i32 {
+    let mut sum = 0;
+    sl.iter().for_each(|x| { sum += *x });
+    sum
 }
